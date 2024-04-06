@@ -31,7 +31,7 @@ const Navbar = () => {
                         <img src={userPic} />
                     </div>
                 </div>
-                <Link>
+                <Link to='/login'>
                     <button className="btn border border-gray-500">Login</button>
                 </Link>
             </div>
