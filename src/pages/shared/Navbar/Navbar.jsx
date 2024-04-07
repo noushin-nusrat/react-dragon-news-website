@@ -1,8 +1,19 @@
 import { Link, NavLink } from "react-router-dom";
 import userPic from '../../../assets/user.png'
+import { connectStorageEmulator } from "firebase/storage";
+import { useContext } from "react";
+import { AuthContext } from "../../../providers/AuthProvider";
 
 
 const Navbar = () => {
+    const { user, logOut } = useContext(AuthContext);
+
+    const handleSignOut = () => {
+        logOut()
+            .then()
+            .catch()
+    }
+
     const navLinks = <>
         <li><NavLink className={'font-semibold'} to='/'>Home</NavLink></li>
         <li><NavLink className={'font-semibold'} to='/about'>About</NavLink></li>
@@ -31,9 +42,14 @@ const Navbar = () => {
                         <img src={userPic} />
                     </div>
                 </div>
-                <Link to='/login'>
-                    <button className="btn border border-gray-500">Login</button>
-                </Link>
+                {
+                    user ?
+                        <button onClick={handleSignOut} className="btn border border-gray-500">SignOut</button>
+                        :
+                        <Link to='/login'>
+                            <button className="btn border border-gray-500">Login</button>
+                        </Link>
+                }
             </div>
         </div>
     );
